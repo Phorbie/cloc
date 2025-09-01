@@ -3,7 +3,7 @@ function updateTime() {
     const now = new Date();
 
     const estTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-    
+
     const hours = now.getHours() % 12 || 12;
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const timeString = `${hours}:${minutes}`;
@@ -33,21 +33,47 @@ function updateDate() {
 setInterval(updateDate, 1000);
 
 const apiKey = 'cee34975e4bf84d0c080f6a443c26ebc'; // Replace with your OpenWeatherMap API key
-const city = 'San Diego'; // Replace with the name of the city you want to get weather information for
-const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
 
-// Fetch the weather data from the OpenWeatherMap API
-fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
-    // Update the weather icon
+function updateWeather(data) {
     const iconCode = data.weather[0].icon;
     const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
     document.getElementById('weather-icon').src = iconUrl;
     document.getElementById('weather-icon').alt = data.weather[0].description;
 
-    // Update the temperature
     const temp = Math.round(data.main.temp);
     document.getElementById('weather-temp').textContent = `${temp}°F`;
-  })
-  .catch(error => console.log(error));
+}
+
+function fetchWeather(url) {
+    fetch(url)
+        .then(response => response.json())
+        .then(updateWeather)
+        .catch(error => console.log(error));
+}
+
+function initWeather() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const { latitude, longitude } = position.coords;
+                const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+                fetchWeather(apiUrl);
+            },
+            () => {
+                const city = 'San Diego';
+                const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+                fetchWeather(apiUrl);
+            }
+        );
+    } else {
+        const city = 'San Diego';
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+        fetchWeather(apiUrl);
+    }
+}
+
+initWeather();
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js').catch(error => console.log(error));
+}

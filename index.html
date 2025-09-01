@@ -1,21 +1,20 @@
-<!-- 
+<!--
 Project: cloc
 Author: Ben Steward
-Date: 2023-04-28 
+Date: 2023-04-28
 Revised: 2023-04-30
 -->
 
-<!-- TODO 
+<!-- TODO
  - [ ] Add settings menu
  - [ ] Add option to change color
- - [ ] Capture location for weather 
+ - [x] Capture location for weather
  - [ ] Change weather icon theme
  - [ ] Create PWA icon
- - [ ] Add PWA manifest
- - [ ] Add PWA service worker
+ - [x] Add PWA manifest
+ - [x] Add PWA service worker
  - [ ] Add fallback icon for weather
- - [ ] 
-
+ - [ ]
 -->
 
 <!DOCTYPE html>
@@ -30,6 +29,7 @@ Revised: 2023-04-30
     <style>
         @import url(style.css);
     </style>
+    <link rel="manifest" href="manifest.json">
     <script src="app.js"></script>
 </head>
 
@@ -47,7 +47,7 @@ Revised: 2023-04-30
             <img src="cog.svg" alt="Settings icon">
         </div> <!-- end #settings -->
         <div id="weather">
-            <img id="weather-icon" src="" alt="">
+            <img id="weather-icon" src="https://openweathermap.org/img/wn/01d.png" alt="Weather icon placeholder">
             <span id="weather-temp"></span>
         </div><!-- end #weather -->
     </div><!-- end .container -->
