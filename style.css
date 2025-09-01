@@ -2,7 +2,7 @@
 body {
     background-color: #000000;
     font-family: 'Open Sans', sans-serif;
-    font-size: 2rem;
+    font-size: clamp(1rem, 2vw, 2rem);
     line-height: 2;
     color: #d10000;
     margin: 0;
@@ -12,10 +12,10 @@ body {
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 0.8fr 1.5fr 0.7fr;
-    gap: 0px 0px;
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
     grid-template-areas:
-        "logo . date"
+        "date . logo"
         ". clock-container ."
         "weather . settings";
     height: 100vh;
@@ -24,14 +24,20 @@ body {
 
 #clock-container {
     display: grid;
-    grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-        "top-clock"
-        "bottom-clock";
     grid-area: clock-container;
-    font-size: 4rem;
+    font-size: clamp(2rem, 10vw, 8rem);
+}
+
+.clock-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.clock-label {
+    font-size: clamp(1rem, 2vw, 2rem);
+    margin-left: 0.5rem;
 }
 
 #logo {
@@ -41,17 +47,16 @@ body {
 
 #date {
     grid-area: date;
-    text-align: right;
-    padding: 10px;
-    margin: 0 1rem;
+    text-align: left;
+    padding: 1rem;
+    line-height: 1.2;
 }
 
 #top-clock,
 #bottom-clock {
     display: block;
     text-align: center;
-    font-size: 2em;
-    padding: 10px;
+    padding: 0.5rem;
 }
 
 
@@ -60,25 +65,28 @@ body {
     display: flex;
     align-items: center;
     justify-content: start;
-    font-size: 2rem;
+    font-size: clamp(1rem, 2vw, 2rem);
+    align-self: end;
+    justify-self: start;
+    margin: 1rem;
 }
 
 #weather img {
     margin-right: 10px;
+    width: clamp(40px, 5vw, 70px);
+    height: auto;
 }
 
 /* pin the settings image to the bottom right of the screen */
 #settings {
     grid-area: settings;
-    float: right;
     margin: 1rem 2rem;
-    justify-content: end;
+    justify-self: end;
+    align-self: end;
 }
 
 #settings img {
-    width: 0.6fr;
-    float: right;
-    width: 70px;
+    width: clamp(40px, 5vw, 70px);
     transform: rotate(-90deg);
     transition: transform 0.5s ease;
 }
@@ -87,5 +95,24 @@ body {
     cursor: pointer;
     transform: rotate(90deg);
     transition: transform 0.5s ease;
+}
 
+.hidden {
+    display: none;
+}
+
+#settings-panel {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    background-color: #000;
+    border: 1px solid #d10000;
+    padding: 1rem;
+    color: #d10000;
+}
+
+#settings-panel select {
+    background-color: #000;
+    color: #d10000;
+    border: 1px solid #d10000;
 }

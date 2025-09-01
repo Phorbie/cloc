@@ -1,0 +1,72 @@
+<!--
+Project: cloc
+Author: Ben Steward
+Date: 2023-04-28
+Revised: 2023-04-30
+-->
+
+<!-- TODO
+ - [ ] Add settings menu
+ - [ ] Add option to change color
+ - [x] Capture location for weather
+ - [ ] Change weather icon theme
+ - [ ] Create PWA icon
+ - [x] Add PWA manifest
+ - [x] Add PWA service worker
+ - [ ] Add fallback icon for weather
+ - [ ]
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Ben Steward">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="cloc is a simple clock and weather app.">
+        <title>cloc</title>
+        <style>
+            @import url(style.css);
+        </style>
+        <link rel="manifest" href="manifest.json">
+        <script src="app.js" defer></script>
+    </head>
+
+<body>
+    <div class="container">
+        <div id="date"></div><!-- end #date -->
+        <div id="logo">
+            <label for="logo">cl</label><label for="logo-middle">:</label><label for="logo-end">oc</label>
+        </div> <!-- end #logo -->
+        <div id="clock-container">
+            <div class="clock-row">
+                <div id="top-clock" class="clock"></div>
+                <div id="top-label" class="clock-label"></div>
+            </div><!-- end .clock-row -->
+            <div class="clock-row">
+                <div id="bottom-clock" class="clock"></div>
+                <div id="bottom-label" class="clock-label"></div>
+            </div><!-- end .clock-row -->
+        </div><!-- end #clock-container -->
+        <div id="settings">
+            <img src="cog.svg" alt="Settings icon">
+        </div> <!-- end #settings -->
+        <div id="settings-panel" class="hidden">
+            <label for="timezone-select">Second clock timezone</label>
+            <select id="timezone-select">
+                <option value="America/New_York">Eastern</option>
+                <option value="America/Chicago">Central</option>
+                <option value="America/Denver">Mountain</option>
+                <option value="America/Los_Angeles">Pacific</option>
+                <option value="UTC">UTC</option>
+            </select>
+        </div><!-- end #settings-panel -->
+        <div id="weather">
+            <img id="weather-icon" src="https://openweathermap.org/img/wn/01d.png" alt="Weather icon placeholder">
+            <span id="weather-temp"></span>
+        </div><!-- end #weather -->
+    </div><!-- end .container -->
+</body>
+
+</html>
