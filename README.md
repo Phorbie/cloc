@@ -1,13 +1,10 @@
 # cloc
 
-cloc is a simple clock and weather app.
+cloc is a digital clock on the internet
 
 ## Features
-- Displays local time and Eastern Time.
+- Displays two clocks: one set to local time, a second set to a selected timezon.
 - Shows the current date.
-- Fetches weather using the browser's location when available, with a San Diego fallback.
-- Includes a basic PWA manifest and service worker.
-
-## GitHub Pages
-- Static assets use relative paths for compatibility with GitHub Pages hosting.
-- To deploy, enable GitHub Pages on the repository root and ensure this project is served from that branch.
+- Fetches weather using the browser's location when available, with a zip entry as fallback
+- Robust theme support
+- Full Keyboard support
